@@ -23,17 +23,20 @@
             <x-input-error :messages="$errors->get('contact_number')" class="mt-2" />
         </div>
 
-        <!-- Password -->
         <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+    <x-input-label for="password" :value="__('Password')" />
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
+    <x-text-input id="password" class="block mt-1 w-full"
+                  type="password"
+                  name="password"
+                  required autocomplete="new-password"/>
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+    <div id="password-strength-bar" class="mt-2 w-full bg-gray-200 h-2 rounded">
+        <div id="password-strength-indicator" class="h-2 rounded" style="width: 0%;"></div>
+    </div>
+
+    <x-input-error :messages="$errors->get('password')" class="mt-2" />
+</div>
 
         <!-- Confirm Password -->
         <div class="mt-4">

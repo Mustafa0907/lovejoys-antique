@@ -1,4 +1,5 @@
 import './bootstrap';
+import './passwordStrength';
 
 import Alpine from 'alpinejs';
 

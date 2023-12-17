@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('evaluation_requests', function (Blueprint $table) {
             $table->id();
-            $table->string('request_details');
             // Other necessary fields
             $table->timestamps();
         });

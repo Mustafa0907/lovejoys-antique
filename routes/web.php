@@ -30,6 +30,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/evaluation-requests', [EvaluationRequestController::class, 'index'])
         ->middleware('admin')
         ->name('evaluation-requests.index');
+    Route::get('/request-evaluation', [EvaluationRequestController::class, 'create'])->name('evaluation-requests.create');
+    Route::post('/request-evaluation', [EvaluationRequestController::class, 'store'])->name('evaluation-requests.store');
+    
 });
 
 require __DIR__.'/auth.php';

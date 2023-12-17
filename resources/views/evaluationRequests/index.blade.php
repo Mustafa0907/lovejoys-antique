@@ -9,7 +9,7 @@
         @else
             @foreach ($requests as $request)
                 <div class="mt-4 bg-white dark:bg-gray-800 shadow p-4">
-                    <p class="text-gray-600 dark:text-gray-200">{{ $request->request_details }}</p>
+                    <p class="text-gray-600 dark:text-gray-200">{{ $request->comment }}</p>
                     {{-- Display other details as needed --}}
                 </div>
             @endforeach

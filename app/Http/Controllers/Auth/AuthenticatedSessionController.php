@@ -32,6 +32,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
     
         // Generate and send OTP
+        // uncomment this part to use otp 
         $user = User::where('email', $request->email)->firstOrFail();
         $user->otp = rand(100000, 999999); // 6-digit OTP
         $user->otp_expires_at = now()->addMinutes(10);
@@ -43,6 +44,11 @@ class AuthenticatedSessionController extends Controller
     
         session(['email' => $request->email]); // Store email in session
         return redirect()->route('otp.verify');
+
+
+        //if commenting above code to stop using otp uncomment the redirect below
+        // return redirect()->intended(RouteServiceProvider::HOME);
+
     }
     
 

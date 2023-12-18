@@ -12,6 +12,7 @@ class EvaluationRequest extends Model
         'user_id',
         'comment',
         'contact_method',
+        'image',
     ];
 
     public function user()

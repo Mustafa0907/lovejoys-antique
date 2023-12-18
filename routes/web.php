@@ -41,7 +41,9 @@ Route::middleware('auth')->group(function () {
         ->name('evaluation-requests.index');
     Route::get('/request-evaluation', [EvaluationRequestController::class, 'create'])->name('evaluation-requests.create');
     Route::post('/request-evaluation', [EvaluationRequestController::class, 'store'])->name('evaluation-requests.store');
-    
+    Route::delete('/evaluation-requests/{evaluationRequest}', [EvaluationRequestController::class, 'destroy'])->name('evaluation-requests.destroy');
+
+
 });
 
 require __DIR__.'/auth.php';

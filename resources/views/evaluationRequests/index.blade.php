@@ -4,15 +4,30 @@
     <div class="container mx-auto py-6 px-4">
         <h1 class="text-xl font-semibold text-gray-800 dark:text-white">Evaluation Requests</h1>
 
-        @if($requests->isEmpty())
-            <p class="text-gray-600 dark:text-gray-400">No requests found.</p>
-        @else
-            @foreach ($requests as $request)
-                <div class="mt-4 bg-white dark:bg-gray-800 shadow p-4">
-                    <p class="text-gray-600 dark:text-gray-200">{{ $request->comment }}</p>
-                    {{-- Display other details as needed --}}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            @forelse ($requests as $request)
+                <div style="background-color: lightgrey;" class="dark:bg-gray-800 shadow-lg p-4 rounded-lg">
+                    <div class="flex items-center justify-between">
+                        <div class="w-1/3">
+                            @if ($request->image)
+                                <img src="{{ Storage::url($request->image) }}" alt="Uploaded Image" class="max-w-full max-h-full rounded-lg">
+                            @endif
+                        </div>
+                        <div class="w-2/3 ml-4">
+                            <p class="text-gray-600 dark:text-gray-200 font-bold">{{ $request->comment }}</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-right">
+                    <form action="{{ route('evaluation-requests.destroy', $request->id) }}" method="POST" class="inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="px-3 py-1 text-white bg-red-500 rounded-full">Delete</button>
+                    </form>
+                    </div>
                 </div>
-            @endforeach
-        @endif
+            @empty
+                <p class="text-gray-600 dark:text-gray-400">No requests found.</p>
+            @endforelse
+        </div>
     </div>
 @endsection

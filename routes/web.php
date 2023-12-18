@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EvaluationRequestController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,14 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/otp-verify', function () {
+    return view('auth.verify-otp');
+})->name('otp.verify');
+
+Route::post('/otp-check', [AuthenticatedSessionController::class, 'checkOTP'])->name('otp.check');
+Route::post('/otp-resend', [AuthenticatedSessionController::class, 'resendOTP'])->name('otp.resend');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

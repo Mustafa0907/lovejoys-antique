@@ -13,6 +13,7 @@ class EvaluationRequest extends Model
         'comment',
         'contact_method',
         'image',
+        'is_approved',
     ];
 
     public function user()

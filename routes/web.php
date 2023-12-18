@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EvaluationRequestController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Models\EvaluationRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,8 +22,11 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $requests = App\Models\EvaluationRequest::where('is_approved', true)->get();
+    \Log::debug('Requests: ', $requests->toArray());
+    return view('dashboard', compact('requests'));
 })->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::get('/otp-verify', function () {
     return view('auth.verify-otp');
@@ -42,6 +46,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/request-evaluation', [EvaluationRequestController::class, 'create'])->name('evaluation-requests.create');
     Route::post('/request-evaluation', [EvaluationRequestController::class, 'store'])->name('evaluation-requests.store');
     Route::delete('/evaluation-requests/{evaluationRequest}', [EvaluationRequestController::class, 'destroy'])->name('evaluation-requests.destroy');
+    Route::post('/evaluation-requests/{id}/approve', [EvaluationRequestController::class, 'approve'])->name('evaluation-requests.approve');
 
 
 });

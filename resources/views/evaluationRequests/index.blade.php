@@ -15,14 +15,24 @@
                         </div>
                         <div class="w-2/3 ml-4">
                             <p class="text-gray-600 dark:text-gray-200 font-bold">{{ $request->comment }}</p>
+                            <!-- Approval Status -->
+                            <p>Status: {{ $request->is_approved ? 'Approved' : 'Pending' }}</p>
                         </div>
                     </div>
                     <div class="mt-4 text-right">
-                    <form action="{{ route('evaluation-requests.destroy', $request->id) }}" method="POST" class="inline">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="px-3 py-1 text-white bg-red-500 rounded-full">Delete</button>
-                    </form>
+                        <!-- Approval Button -->
+                        <form action="{{ route('evaluation-requests.approve', $request->id) }}" method="POST" class="inline">
+                            @csrf
+                            <button type="submit" class="px-3 py-1 mr-2 text-white bg-green-500 rounded-full">
+                                {{ $request->is_approved ? 'Unapprove' : 'Approve' }}
+                            </button>
+                        </form>
+                        <!-- Delete Button -->
+                        <form action="{{ route('evaluation-requests.destroy', $request->id) }}" method="POST" class="inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="px-3 py-1 text-white bg-red-500 rounded-full">Delete</button>
+                        </form>
                     </div>
                 </div>
             @empty

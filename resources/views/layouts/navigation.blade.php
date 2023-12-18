@@ -15,6 +15,11 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @if(Auth::user()->role == 'administrator') <!-- Assuming 'role' is the field used -->
+                        <x-nav-link :href="route('evaluation-requests.index')" :active="request()->routeIs('evaluation-requests.index')">
+                            {{ __('Evaluation Requests') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -70,6 +75,11 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            @if(Auth::user()->role == 'administrator') <!-- Again, checking the user's role -->
+            <x-responsive-nav-link :href="route('evaluation-requests.index')" :active="request()->routeIs('evaluation-requests.index')">
+                {{ __('Evaluation Requests') }}
+            </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->

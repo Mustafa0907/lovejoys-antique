@@ -22,8 +22,16 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    $requests = App\Models\EvaluationRequest::where('is_approved', true)->get();
+    // Get the ID of the currently authenticated user
+    $userId = Auth::id();
+
+    // Fetch only approved evaluation requests for this user
+    $requests = EvaluationRequest::where('is_approved', true)
+                                 ->where('user_id', $userId)
+                                 ->get();
+
     \Log::debug('Requests: ', $requests->toArray());
+
     return view('dashboard', compact('requests'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 

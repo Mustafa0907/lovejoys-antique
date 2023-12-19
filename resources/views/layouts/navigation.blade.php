@@ -15,6 +15,9 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('evaluation-requests.create')" :active="request()->routeIs('evaluation-requests.create')">
+                        {{ __('Request Evaluation') }}
+                    </x-nav-link>
                     @if(Auth::user()->role == 'administrator') <!-- Assuming 'role' is the field used -->
                         <x-nav-link :href="route('evaluation-requests.index')" :active="request()->routeIs('evaluation-requests.index')">
                             {{ __('Evaluation Requests') }}
